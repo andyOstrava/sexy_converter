@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f6f3ff">
+    <meta name="description" content="A simple SE and GBP value converter.">
+    <title>SEx:y convertor</title>
+    <link rel="icon" href="icon.svg" type="image/svg+xml">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="converter-card" aria-labelledby="app-title">
+        <div class="brand-mark" aria-hidden="true">S&#8596;&#163;</div>
+        <p class="eyebrow">Simple money maths</p>
+        <h1 id="app-title">SEx:y convertor</h1>
+        <p class="intro">Convert between SE and GBP at a fixed rate of 1 GBP = 7 SE.</p>
+
+        <form class="converter" novalidate>
+          <div class="field-group">
+            <label for="se-value">SE value</label>
+            <div class="input-wrap">
+              <span class="currency-symbol" aria-hidden="true">SE</span>
+              <input id="se-value" name="se-value" type="number" inputmode="decimal" min="0" step="0.01" placeholder="0.00" autocomplete="off">
+            </div>
+          </div>
+
+          <div class="conversion-arrow" aria-hidden="true">&#8597;</div>
+
+          <div class="field-group">
+            <label for="gbp-value">GBP value</label>
+            <div class="input-wrap">
+              <span class="currency-symbol" aria-hidden="true">&#163;</span>
+              <input id="gbp-value" name="gbp-value" type="number" inputmode="decimal" min="0" step="0.01" placeholder="0.00" autocomplete="off">
+            </div>
+          </div>
+        </form>
+
+        <p class="rate-note">Fixed rate <strong>1 GBP = 7 SE</strong></p>
+      </section>
+    </main>
+  </body>
+</html>

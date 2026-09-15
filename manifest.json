@@ -1,0 +1,19 @@
+{
+  "name": "SEx:y convertor",
+  "short_name": "SEx:y",
+  "description": "A simple converter between SE and GBP values.",
+  "lang": "en-GB",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f6f3ff",
+  "theme_color": "#f6f3ff",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
