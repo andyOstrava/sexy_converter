@@ -1,4 +1,3 @@
-const RATE = 7;
 const seInput = document.querySelector("#se-value");
 const gbpInput = document.querySelector("#gbp-value");
 
