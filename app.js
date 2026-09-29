@@ -2,24 +2,36 @@ const RATE = 7;
 const seInput = document.querySelector("#se-value");
 const gbpInput = document.querySelector("#gbp-value");
 
-function updateValue(source, target, multiplier) {
-  if (source.value === "") {
-    target.value = "";
+function updateGrossValue() {
+  if (gbpInput.value === "") {
+    seInput.value = "";
     return;
   }
 
-  const value = Number(source.value);
-  target.value = Number.isFinite(value) && value >= 0
-    ? (value * multiplier).toFixed(2)
+  const value = Number(gbpInput.value);
+  seInput.value = Number.isFinite(value) && value >= 0
+    ? ((value + 0.2) / 0.9705).toFixed(2)
+    : "";
+}
+
+function updateNetValue() {
+  if (seInput.value === "") {
+    gbpInput.value = "";
+    return;
+  }
+
+  const value = Number(seInput.value);
+  gbpInput.value = Number.isFinite(value) && value >= 0
+    ? ((value * 0.9705) - 0.2).toFixed(2)
     : "";
 }
 
 seInput.addEventListener("input", () => {
-  updateValue(seInput, gbpInput, 1 / RATE);
+  updateNetValue();
 });
 
 gbpInput.addEventListener("input", () => {
-  updateValue(gbpInput, seInput, RATE);
+  updateGrossValue();
 });
 
 if ("serviceWorker" in navigator) {
