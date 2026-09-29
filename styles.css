@@ -70,6 +70,11 @@ h1 {
   line-height: 1;
 }
 
+h1 img {
+  height: clamp(2rem, 8vw, 3rem);
+  margin-bottom: -5px;
+}
+
 .intro {
   max-width: 25rem;
   margin: 1rem 0 2rem;
@@ -148,11 +153,16 @@ input[type="number"] {
   height: 2rem;
   margin: 0.1rem auto;
   place-items: center;
-  border: 1px solid #e3d9f8;
-  border-radius: 50%;
-  color: #7953bb;
-  background: #f7f2ff;
+  /* border: 1px solid #e3d9f8; */
+  /* border-radius: 50%; */
+  /* color: #7953bb; */
+  /* background: #f7f2ff; */
   font-size: 1.1rem;
+}
+
+.conversion-arrow img {
+  height: 2rem;
+  rotate: 90deg;
 }
 
 .rate-note {
