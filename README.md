@@ -41,6 +41,14 @@ Then open:
 http://localhost:8000
 ```
 
+## Lighthouse CI
+
+GitHub Actions runs a Lighthouse audit for pushes, pull requests, and manual
+dispatches. It audits three runs and fails if any Performance, Accessibility,
+Best Practices, or SEO score is below 90%. The Actions run summary displays the
+scores, and the `lighthouse-reports` artifact contains the full HTML and JSON
+reports for 14 days.
+
 ## License
 
 This project is licensed under the MIT License. See [LICENSE](LICENSE) for  details.
