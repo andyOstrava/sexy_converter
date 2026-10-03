@@ -29,9 +29,18 @@ jobs:
       # - name: check date
       #   run: date
 
-      # - name: Try running webserver
-      #   run: python3 -m http.server  --bind 127.0.0.1 &
+      - name: Try running webserver
+        run: python3 -m http.server  --bind 127.0.0.1 &
 
+      - name: wait while server starts
+        run: sleep 3
+
+      - name: try fetching site
+        run: curl -k -vvv http://127.0.0.1:8000
+
+      - name: try differently
+        run: wget http://localhost:8000
+        
       - name: Install Lighthouse CI
         run: npm install --global @lhci/cli@0.15.1
 
