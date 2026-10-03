@@ -21,8 +21,8 @@ jobs:
           node-version: 20
 
       - name: Try running webserver
-        run: python -m http.server 8002
-        
+        run: python3 && python3 -m http.server 8002
+
       - name: Install Lighthouse CI
         run: npm install --global @lhci/cli@0.15.1
 
