@@ -1,0 +1,66 @@
+name: Lighthouse audit
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          
+      # - name: check python version
+      #   run:  python3 --version
+        
+      # - name: check current dir
+      #   run: echo $PWD
+
+      # - name: check date
+      #   run: date
+
+      - name: Try running webserver
+        run: python3 -m http.server  --bind 127.0.0.1 &
+
+      - name: wait while server starts
+        run: sleep 3
+
+      - name: try fetching site
+        run: curl -k -vvv http://127.0.0.1:8000
+
+      - name: try differently
+        run: wget http://localhost:8000
+
+      - name: Install Lighthouse CI
+        run: npm install --global @lhci/cli@0.15.1
+
+      - name: Run Lighthouse audit
+        run: lhci autorun --config=./lighthouserc.json
+
+      - name: List audit directory
+        run: ls -altr .lighthouseci
+
+      - name: Add audit scores to the job summary
+        if: always()
+        run: node scripts/lighthouse-summary.mjs
+
+
+      - name: Upload Lighthouse reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-reports
+          path: .lighthouseci/
+          if-no-files-found: warn
+          retention-days: 14
+          include-hidden-files: true
