@@ -40,16 +40,20 @@ jobs:
 
       - name: try differently
         run: wget http://localhost:8000
-        
+
       - name: Install Lighthouse CI
         run: npm install --global @lhci/cli@0.15.1
 
       - name: Run Lighthouse audit
         run: lhci autorun --config=./lighthouserc.json
 
+      - name: List audit directory
+        run: ls -altr .lighthouseci
+
       - name: Add audit scores to the job summary
         if: always()
         run: node scripts/lighthouse-summary.mjs
+
 
       - name: Upload Lighthouse reports
         if: always()
@@ -59,3 +63,4 @@ jobs:
           path: .lighthouseci/
           if-no-files-found: warn
           retention-days: 14
+          include-hidden-files: true
