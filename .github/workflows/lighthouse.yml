@@ -26,9 +26,13 @@ jobs:
       - name: Run Lighthouse audit
         run: lhci autorun --config=./lighthouserc.json
 
+      - name: List audit directory
+        run: ls -altr .lighthouseci
+
       - name: Add audit scores to the job summary
         if: always()
         run: node scripts/lighthouse-summary.mjs
+
 
       - name: Upload Lighthouse reports
         if: always()
