@@ -28,11 +28,11 @@ Features include:
 
 Because this is a static app, you can open the project directly in a browser or serve it locally with any simple static file server.
 
-Example using Python:
+Example using Python 3:
 
 ```bash
 cd /path/to/sexy_converter
-python -m http.server 8000
+python3 -m http.server 8000
 ```
 
 Then open:
@@ -40,6 +40,14 @@ Then open:
 ```text
 http://localhost:8000
 ```
+
+## Lighthouse CI
+
+GitHub Actions runs a Lighthouse audit for pushes, pull requests, and manual
+dispatches. It audits three runs and fails if any Performance, Accessibility,
+Best Practices, or SEO score is below 90%. The Actions run summary displays the
+scores, and the `lighthouse-reports` artifact contains the full HTML and JSON
+reports for 14 days.
 
 ## License
 
