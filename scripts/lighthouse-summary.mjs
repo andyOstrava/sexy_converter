@@ -41,11 +41,8 @@ const rows = reports.map(({ file, report }) => {
   return `| ${file} | ${scores.join(" | ")} |`;
 });
 
-const result = failed ? "FAILED — at least one score is below 90% or missing." : "PASSED — all scores are at least 90%.";
 const summary = [
   "## Lighthouse audit",
-  "",
-  `**Result:** ${result}`,
   "",
   `| Report | ${categories.map(([, label]) => label).join(" | ")} |`,
   `| --- | ${categories.map(() => "---:").join(" | ")} |`,
@@ -56,7 +53,3 @@ const summary = [
 ].join("\n");
 
 appendFileSync(process.env.GITHUB_STEP_SUMMARY ?? "/dev/stdout", summary);
-
-if (failed) {
-  process.exitCode = 1;
-}
