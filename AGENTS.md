@@ -50,10 +50,8 @@ Then smoke-test the page in a browser: entering `100` in “Club receives” sho
 
 If port 8000 is occupied, choose another port and use that port in the browser URL and Lighthouse configuration.
 
-## Existing caveat
-
-`sw.js` lists `./icon.svg` in its precache, but that file is absent (the available icons are under `images/`). `cache.addAll()` can therefore reject service-worker installation, so do not assume offline/PWA caching works. If changing the precache, ensure every listed path exists and verify install/offline behavior in a browser.
-
+If changing the precache in `sw.js`, ensure every listed path exists and verify install/offline behavior in a browser.
+ 
 ## Working guidance
 
 Prefer small changes to the existing plain web stack. Preserve the current no-build setup unless the requested feature genuinely requires otherwise. Run the Lighthouse CI check for CI-relevant changes; use the syntax/manifest checks and browser smoke test above as appropriate. Trust these instructions to avoid repeat exploration; search the repository only when a needed detail is missing here or an instruction proves incorrect.
