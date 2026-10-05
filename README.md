@@ -28,7 +28,7 @@ Features include:
 
 Because this is a static app, you can open the project directly in a browser or serve it locally with any simple static file server.
 
-Example using Python:
+Example using Python 3:
 
 ```bash
 cd /path/to/sexy_converter

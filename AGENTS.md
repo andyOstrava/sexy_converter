@@ -16,11 +16,11 @@ The conversion is `received = charge * 0.9705 - 0.20`; the inverse is `charge = 
 - `images/` — app and conversion icons. Avoid changing binary assets unless needed.
 - `README.md` — project purpose, formulas, local usage, and license; `LICENSE` is MIT.
 
-The repository root otherwise contains only those app files and assets. There is no `CONTRIBUTING.md`, other documentation, dependency/build/test/lint configuration, or checked-in GitHub Actions workflow. No CI checks are configured here.
+The repository also includes a GitHub Actions Lighthouse CI workflow in `.github/workflows/lighthouse.yml`, configured by `lighthouserc.json`. There is no `CONTRIBUTING.md`, package manifest, build system, or unit-test/lint configuration.
 
 ## Bootstrap, run, and validate
 
-No bootstrap or dependency-install step is needed (and there is no `npm install` or equivalent). There is no build or lint command. Do not add dependencies for routine changes.
+The app itself has no bootstrap or dependency-install step, build command, or lint command. Do not add dependencies for routine changes. CI installs Lighthouse CI globally as part of its workflow.
 
 From the repository root, start the static server:
 
@@ -28,18 +28,27 @@ From the repository root, start the static server:
 python3 -m http.server 8000 --bind 127.0.0.1
 ```
 
-Open `http://127.0.0.1:8000/` in a browser and stop the foreground server with Ctrl-C. This command was verified with Python 3.14.4; Node.js 26.8.2 was used for the optional syntax checks below. The README uses `python -m http.server 8000`, but `python` is not installed in the verified environment; use `python3`. No runtime version manager or environment setup was required. Serving over localhost is preferable to opening the file directly, especially for service-worker behavior.
+Open `http://127.0.0.1:8000/` in a browser and stop the foreground server with Ctrl-C. Use `python3` for Python commands. Serving over localhost is preferable to opening the file directly, especially for service-worker behavior.
 
-There is no automated test suite. For JavaScript changes, run:
+The automated CI check runs Lighthouse CI on pushes, pull requests, and manual dispatches. It audits three runs and fails if any Performance, Accessibility, Best Practices, or SEO score is below 90%. To run the same check locally, install Lighthouse CI and run:
+
+```bash
+npm install --global @lhci/cli@0.15.1
+lhci autorun --config=./lighthouserc.json
+```
+
+CI adds audit scores to the Actions job summary and uploads the HTML and JSON reports as the `lighthouse-reports` artifact for 14 days.
+
+There is no unit-test suite. For JavaScript changes, run the optional syntax and manifest checks:
 
 ```bash
 node --check app.js && node --check sw.js
 python3 -m json.tool manifest.json >/dev/null
 ```
 
-Both commands pass in the verified environment. Then smoke-test the page in a browser: entering `100` in “Club receives” should show `103.25` for “SE charge”; entering `100` in “SE charge” should show `96.85` received; clearing either input should clear the other. Confirm both inputs remain usable at narrow viewport widths if changing layout. These conversion checks were also run against the input handlers with Node and passed.
+Then smoke-test the page in a browser: entering `100` in “Club receives” should show `103.25` for “SE charge”; entering `100` in “SE charge” should show `96.85` received; clearing either input should clear the other. Confirm both inputs remain usable at narrow viewport widths if changing layout.
 
-The local server was verified to serve the page and its linked app files/assets successfully on port 8000. No build artifacts or temporary repository files are produced, so there is no clean step; avoid deleting user files to simulate a clean environment. No validation command timed out. If port 8000 is occupied, choose another port and use that port in the browser URL.
+If port 8000 is occupied, choose another port and use that port in the browser URL and Lighthouse configuration.
 
 ## Existing caveat
 
@@ -47,4 +56,4 @@ The local server was verified to serve the page and its linked app files/assets 
 
 ## Working guidance
 
-Prefer small changes to the existing plain web stack. Preserve the current no-build setup unless the requested feature genuinely requires otherwise. There are no repository-specific pre-commit checks beyond the syntax/JSON checks and browser smoke test above. Trust these instructions to avoid repeat exploration; search the repository only when a needed detail is missing here or an instruction proves incorrect.
+Prefer small changes to the existing plain web stack. Preserve the current no-build setup unless the requested feature genuinely requires otherwise. Run the Lighthouse CI check for CI-relevant changes; use the syntax/manifest checks and browser smoke test above as appropriate. Trust these instructions to avoid repeat exploration; search the repository only when a needed detail is missing here or an instruction proves incorrect.
