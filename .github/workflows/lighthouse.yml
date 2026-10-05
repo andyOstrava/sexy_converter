@@ -2,6 +2,10 @@ name: Lighthouse audit
 
 on:
   push:
+    tags:
+      - v**
+    branches:
+      - main
   pull_request:
   workflow_dispatch:
 
