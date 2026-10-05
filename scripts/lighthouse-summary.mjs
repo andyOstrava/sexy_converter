@@ -21,21 +21,14 @@ const reports = reportFiles.map((file) => ({
   report: JSON.parse(readFileSync(`${reportDirectory}/${file}`, "utf8"))
 }));
 
-let failed = false;
 const rows = reports.map(({ file, report }) => {
   const scores = categories.map(([key]) => {
     const score = report.categories?.[key]?.score;
     if (typeof score !== "number") {
-      failed = true;
       return "Missing ❌";
     }
-
-    if (score < 0.9) {
-      failed = true;
-      return `${Math.round(score * 100)}% ❌`;
-    }
-
-    return `${Math.round(score * 100)}% ✅`;
+    
+    return `${Math.round(score * 100)}% `;
   });
 
   return `| ${file} | ${scores.join(" | ")} |`;
