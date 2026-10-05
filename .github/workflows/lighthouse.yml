@@ -2,6 +2,10 @@ name: Lighthouse audit
 
 on:
   push:
+    tags:
+      - v**
+    branches:
+      - main
   pull_request:
   workflow_dispatch:
 
@@ -29,7 +33,6 @@ jobs:
       - name: Add audit scores to the job summary
         if: always()
         run: node scripts/lighthouse-summary.mjs
-
 
       - name: Upload Lighthouse reports
         if: always()
