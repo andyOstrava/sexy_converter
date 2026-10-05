@@ -32,7 +32,7 @@ Example using Python:
 
 ```bash
 cd /path/to/sexy_converter
-python -m http.server 8000
+python3 -m http.server 8000
 ```
 
 Then open:
