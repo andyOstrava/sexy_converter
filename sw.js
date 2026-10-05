@@ -1,11 +1,12 @@
-const CACHE_NAME = "sexy-convertor-v1";
+const CACHE_NAME = "sexy-converter-v1.1";
 const APP_SHELL = [
   "./",
   "./index.html",
   "./styles.css",
   "./app.js",
   "./manifest.json",
-  "./icon.svg"
+  "./images/sexy_icon.ico",
+  "./images/sexy_icon.png"
 ];
 
 self.addEventListener("install", (event) => {
