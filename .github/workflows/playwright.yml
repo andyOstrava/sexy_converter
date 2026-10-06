@@ -2,6 +2,10 @@ name: Playwright tests
 
 on:
   push:
+    tags:
+      - v**
+    branches:
+      - main
   pull_request:
   workflow_dispatch:
 
@@ -60,3 +64,10 @@ jobs:
               echo "A preceding setup step failed or the test step was skipped. Review the job log for details." >> "$GITHUB_STEP_SUMMARY"
               ;;
           esac
+          
+      # Final step: Force the job to fail if anything failed earlier
+      - name: Check for Pre-Always Failures
+        if: failure()
+        run: |
+          echo "A step failed before processing the test results. Failing the job now."
+          exit 1
