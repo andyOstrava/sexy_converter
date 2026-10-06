@@ -82,4 +82,4 @@ When debugging stale local PWA assets, use a fresh Playwright context or a diffe
  
 ## Working guidance
 
-Prefer small changes to the existing plain web stack. Preserve the no-build runtime setup unless the requested feature genuinely requires otherwise. Run the Lighthouse CI check for CI-relevant changes; run `npm run test:e2e` and the syntax/manifest checks for relevant changes. Trust these instructions to avoid repeat exploration; search the repository only when a needed detail is missing here or an instruction proves incorrect.
+Prefer small changes to the existing plain web stack. Preserve the no-build runtime setup unless the requested feature genuinely requires otherwise. Run the Lighthouse CI check for CI-relevant changes; run `npm run test:e2e` and the syntax/manifest checks for relevant changes. When implementing a new feature, be sure to add relevant e2e tests. Trust these instructions to avoid repeat exploration; search the repository only when a needed detail is missing here or an instruction proves incorrect.
