@@ -49,6 +49,27 @@ Then open:
 http://localhost:8000
 ```
 
+## Browser tests
+
+Playwright end-to-end tests cover the Settings page, shared navigation, theme
+selection and persistence, converter calculations, and offline navigation.
+Install the test dependency and Chromium browser once:
+
+```bash
+npm install
+npx playwright install chromium
+```
+
+Run the suite with:
+
+```bash
+npm run test:e2e
+```
+
+The Playwright config starts a local Python server on port 4173. Each test uses
+an isolated browser context to avoid inheriting stale service-worker or cache
+state from manual testing.
+
 ## Lighthouse CI
 
 GitHub Actions runs a Lighthouse audit for pushes, pull requests, and manual
