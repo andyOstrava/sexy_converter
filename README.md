@@ -70,6 +70,11 @@ The Playwright config starts a local Python server on port 4173. Each test uses
 an isolated browser context to avoid inheriting stale service-worker or cache
 state from manual testing.
 
+GitHub Actions runs these tests on pushes, pull requests, and manual dispatches.
+The workflow summary clearly reports whether the tests passed, failed, or could
+not run. Each run also uploads an interactive **playwright-report** artifact
+for 14 days; on failures, use it alongside the job log to inspect the results.
+
 ## Lighthouse CI
 
 GitHub Actions runs a Lighthouse audit for pushes, pull requests, and manual

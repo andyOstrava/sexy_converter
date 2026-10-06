@@ -1,0 +1,62 @@
+name: Playwright tests
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  e2e:
+    name: End-to-end tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright Chromium and system dependencies
+        run: npx playwright install --with-deps chromium
+
+      - name: Run Playwright end-to-end tests
+        id: playwright
+        run: npm run test:e2e -- --reporter=list,html
+
+      - name: Upload Playwright HTML report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report/
+          if-no-files-found: ignore
+          retention-days: 14
+
+      - name: Add test results to job summary
+        if: always()
+        env:
+          PLAYWRIGHT_OUTCOME: ${{ steps.playwright.outcome }}
+        run: |
+          case "$PLAYWRIGHT_OUTCOME" in
+            success)
+              echo "## ✅ Playwright end-to-end tests passed" >> "$GITHUB_STEP_SUMMARY"
+              echo "All browser tests completed successfully." >> "$GITHUB_STEP_SUMMARY"
+              ;;
+            failure)
+              echo "## ❌ Playwright end-to-end tests failed" >> "$GITHUB_STEP_SUMMARY"
+              echo "Review the failed test details in the job log and download the **playwright-report** artifact for the interactive report." >> "$GITHUB_STEP_SUMMARY"
+              ;;
+            *)
+              echo "## ⚠️ Playwright end-to-end tests did not run" >> "$GITHUB_STEP_SUMMARY"
+              echo "A preceding setup step failed or the test step was skipped. Review the job log for details." >> "$GITHUB_STEP_SUMMARY"
+              ;;
+          esac
