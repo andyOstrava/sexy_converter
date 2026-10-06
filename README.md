@@ -20,9 +20,17 @@ This project is designed as a lightweight Progressive Web App (PWA), so it can b
 Features include:
 
 - fast, lightweight static front-end
+- converter and settings pages with shared navigation
+- light, dark, and crazy colour themes selectable in Settings
+- theme choice is saved in the browser and shared between pages
 - mobile-friendly layout
 - service worker support for offline-capable behaviour
 - simple browser-based interaction with no backend required
+
+Themes are defined with CSS custom properties in `styles.css`. To add a theme,
+add a `[data-theme="name"]` palette there, add its browser theme colour to the
+`themes` object in `app.js`, and add an option to the theme selector in
+`settings.html`.
 
 ## Local usage
 
@@ -40,6 +48,32 @@ Then open:
 ```text
 http://localhost:8000
 ```
+
+## Browser tests
+
+Playwright end-to-end tests cover the Settings page, shared navigation, theme
+selection and persistence, converter calculations, and offline navigation.
+Install the test dependency and Chromium browser once:
+
+```bash
+npm install
+npx playwright install chromium
+```
+
+Run the suite with:
+
+```bash
+npm run test:e2e
+```
+
+The Playwright config starts a local Python server on port 4173. Each test uses
+an isolated browser context to avoid inheriting stale service-worker or cache
+state from manual testing.
+
+GitHub Actions runs these tests on pushes, pull requests, and manual dispatches.
+The workflow summary clearly reports whether the tests passed, failed, or could
+not run. Each run also uploads an interactive **playwright-report** artifact
+for 14 days; on failures, use it alongside the job log to inspect the results.
 
 ## Lighthouse CI
 

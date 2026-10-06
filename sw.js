@@ -1,7 +1,8 @@
-const CACHE_NAME = "sexy-converter-v1.1";
+const CACHE_NAME = "sexy-converter-v1.4";
 const APP_SHELL = [
   "./",
   "./index.html",
+  "./settings.html",
   "./styles.css",
   "./app.js",
   "./manifest.json",
