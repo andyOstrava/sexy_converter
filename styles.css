@@ -1,6 +1,6 @@
 :root {
   --brand-purple: #6f42d9;
-  --navigation-height: 4.25rem;
+  --navigation-height: 5rem;
   color-scheme: light;
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   color: #201d2b;
@@ -39,6 +39,21 @@ body {
   padding: 0 1.25rem;
 }
 
+.nav-brand {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 0.75rem;
+  border-radius: 0.75rem;
+  color: inherit;
+  font-size: clamp(1.25rem, 4vw, 2rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
 .nav-link {
   display: grid;
   width: 2.75rem;
@@ -49,19 +64,23 @@ body {
   text-decoration: none;
 }
 
+.nav-brand:hover,
 .nav-link:hover,
+.nav-brand[aria-current="page"],
 .nav-link[aria-current="page"] {
   background: rgb(255 255 255 / 18%);
 }
 
+.nav-brand:focus-visible,
 .nav-link:focus-visible {
   outline: 3px solid #fff;
   outline-offset: 2px;
 }
 
 .nav-home-icon {
-  width: 2.25rem;
-  height: 2.25rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  flex: 0 0 auto;
   object-fit: contain;
 }
 
@@ -73,8 +92,9 @@ body {
 .app-shell {
   display: grid;
   min-height: calc(100vh - var(--navigation-height));
-  place-items: center;
-  padding: 1.5rem;
+  align-content: start;
+  justify-items: center;
+  padding: 2rem 1.5rem 1.5rem;
 }
 
 .converter-card,
@@ -233,5 +253,14 @@ input[type="number"] {
 
   .top-nav {
     padding: 0 1rem;
+  }
+
+  .nav-brand {
+    gap: 0.5rem;
+  }
+
+  .nav-home-icon {
+    width: 2.5rem;
+    height: 2.5rem;
   }
 }
