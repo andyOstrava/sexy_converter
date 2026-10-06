@@ -3,12 +3,13 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#6f42d9">
+    <meta name="theme-color" content="#8f006f">
     <meta name="description" content="Settings for the SEx:y converter.">
     <title>Settings | SEx:y converter</title>
     <link rel="icon" href="images/sexy_icon.ico" type="image/vnd.microsoft.icon">
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
   </head>
   <body>
     <header class="site-header">
@@ -28,7 +29,17 @@
     <main class="app-shell">
       <section class="settings-card" aria-labelledby="settings-title">
         <h1 id="settings-title">Settings</h1>
-        <p class="intro">Settings will appear here.</p>
+        <p class="intro">Choose the colours used throughout the app.</p>
+        <div class="field-group">
+          <label for="theme-select">Colour theme</label>
+          <div class="input-wrap">
+            <select id="theme-select" name="theme">
+              <option value="light">Light</option>
+              <option value="dark">Dark</option>
+              <option value="crazy">Crazy</option>
+            </select>
+          </div>
+        </div>
       </section>
     </main>
   </body>

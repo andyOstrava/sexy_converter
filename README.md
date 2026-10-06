@@ -21,9 +21,16 @@ Features include:
 
 - fast, lightweight static front-end
 - converter and settings pages with shared navigation
+- light, dark, and crazy colour themes selectable in Settings
+- theme choice is saved in the browser and shared between pages
 - mobile-friendly layout
 - service worker support for offline-capable behaviour
 - simple browser-based interaction with no backend required
+
+Themes are defined with CSS custom properties in `styles.css`. To add a theme,
+add a `[data-theme="name"]` palette there, add its browser theme colour to the
+`themes` object in `app.js`, and add an option to the theme selector in
+`settings.html`.
 
 ## Local usage
 
