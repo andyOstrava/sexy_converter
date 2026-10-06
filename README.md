@@ -20,6 +20,7 @@ This project is designed as a lightweight Progressive Web App (PWA), so it can b
 Features include:
 
 - fast, lightweight static front-end
+- converter and settings pages with shared navigation
 - mobile-friendly layout
 - service worker support for offline-capable behaviour
 - simple browser-based interaction with no backend required
